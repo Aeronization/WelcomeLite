@@ -1,17 +1,19 @@
 from django.urls import path
 
 from job_offers.views import (
-    JobOfferHomeView,
+    JobOfferHome,
     JobOfferCreate,
     JobOfferRead,
     JobOfferUpdate,
     JobOfferDelete
 )
 
+app_name = "job_offers"
+
 urlpatterns = [
-    path("", JobOfferHomeView.as_view(), name="home"),
+    path("", JobOfferHome.as_view(), name="home"),
     path("create/", JobOfferCreate.as_view(), name="create"),
-    path("read/", JobOfferRead.as_view(), name="read"),
-    path("update/", JobOfferUpdate.as_view(), name="update"),
-    path("delete/", JobOfferDelete.as_view(), name="delete")
+    path("read/<int:pk>", JobOfferRead.as_view(), name="read"),
+    path("update/<int:pk>", JobOfferUpdate.as_view(), name="update"),
+    path("delete/<int:pk>", JobOfferDelete.as_view(), name="delete")
 ]
