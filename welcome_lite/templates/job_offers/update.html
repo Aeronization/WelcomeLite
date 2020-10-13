@@ -1,0 +1,25 @@
+{% extends 'general/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="content-selection">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    Update {{ object.candidate_email_address }} Job Offer!
+                </legend>
+                {{ form|crispy }}
+
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">
+                    Update Job Offer
+                </button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

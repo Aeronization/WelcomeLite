@@ -1,0 +1,42 @@
+{% extends "general/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <div class="content-selection" xmlns="http://www.w3.org/1999/html">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    Delete {{ object.candidate_email_address }} Job Offer?
+                </legend>
+
+                <div class="card" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Job Offer</h5>
+                        <p class="card-text">First name: {{ object.candidate_first_name }}</p>
+                        <p class="card-text">Last name: {{ object.candidate_last_name }}</p>
+                        <p class="card-text">Email: {{ object.candidate_email_address }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Start Date: {{ object.start_date }}</li>
+                        <li class="list-group-item">Salary: {{ object.salary_offer }}</li>
+                        {% if object.offer_accepted == True %}
+                            <li class="list-group-item">Offer Accepted?: Yes</li>
+                        {% else %}
+                            <li class="list-group-item">Offer Accepted?: No</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">
+                    Delete User
+                </button>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}
+
