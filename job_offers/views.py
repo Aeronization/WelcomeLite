@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 # (R. Friel - October 12, 2020) - Import CRUD views.
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -46,6 +47,7 @@ class JobOfferUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class JobOfferDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    template_name = "job_offers/delete.html"
     model = JobOffer
     success_url = reverse_lazy("job_offers:home")
     success_message = "Your selected job offer has been deleted."
