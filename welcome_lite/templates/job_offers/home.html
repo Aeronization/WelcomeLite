@@ -3,6 +3,41 @@
 
 {% block content %}
 
-    <p>Welcome to WelcomeLite!</p>
+    {% for object in object_list %}
+
+        <div class="card" style="max-width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Job Offer</h5>
+                <p class="card-text">First name: {{ object.candidate_first_name }}</p>
+                <p class="card-text">Last name: {{ object.candidate_last_name }}</p>
+                <p class="card-text">Email: {{ object.candidate_email_address }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Start Date: {{ object.start_date }}</li>
+                <li class="list-group-item">Salary: {{ object.salary_offer }}</li>
+                {% if object.offer_accepted == True %}
+                    <li class="list-group-item">Offer Accepted?: Yes</li>
+                {% else %}
+                    <li class="list-group-item">Offer Accepted?: No</li>
+                {% endif %}
+            </ul>
+            <div class="card-body">
+                <a href="{% url 'job_offers:read' object.pk %}" class="btn btn-outline-info btn-sm" role="button">Read</a>
+                <a href="{% url 'job_offers:update' object.pk %}" class="btn btn-outline-warning btn-sm" role="button">Update</a>
+                <a href="{% url 'job_offers:delete' object.pk %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
+            </div>
+        </div>
+        <br>
+
+    {% endfor %}
+
+    <div class="card" style="max-width: 18rem;">
+        <div class="card-body">
+            <p class="card-text">Create a new job offer?</p>
+            <p class="card-text">
+                <a href="{% url 'job_offers:create' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create Job Offer</a>
+            </p>
+        </div>
+    </div>
 
 {% endblock content %}
