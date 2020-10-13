@@ -16,6 +16,9 @@ class JobOfferHome(LoginRequiredMixin, SuccessMessageMixin, ListView):
     template_name = "job_offers/home.html"
     model = JobOffer
 
+    def get_queryset(self):
+        queryset = super(JobOfferHome, self).get_queryset()
+        return queryset.filter(job_poster=self.request.user)
 
 class JobOfferCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = "job_offers/create.html"
@@ -23,6 +26,10 @@ class JobOfferCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = JobOffer
     success_url = reverse_lazy("job_offers:home")
     success_message = "Your job offer has been successfully created."
+
+    def form_valid(self, form, *args, **kwargs):
+        form.instance.job_poster = self.request.user
+        return super().form_valid(form)
 
 class JobOfferRead(LoginRequiredMixin, SuccessMessageMixin, DetailView):
     template_name = "job_offers/detail.html"
