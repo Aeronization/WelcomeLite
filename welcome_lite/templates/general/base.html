@@ -42,11 +42,6 @@
                                 <input id="hidden" type="hidden">
                             </form>
 
-                            <!-- <form action="{% url 'account_logout' %}" method="POST">
-                                {% csrf_token %}
-                                <button class="btn btn-link" type="submit">Logout</button>
-                            </form> -->
-
                         {% else %}
                             <a class="nav-item nav-link" href="{% url 'account_login' %}">Login</a>
                             <a class="nav-item nav-link" href="{% url 'account_signup' %}">Register</a>
