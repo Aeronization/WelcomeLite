@@ -3,3 +3,4 @@ django-allauth==0.42.0
 django-crispy-forms
 whitenoise
 gunicorn
+psycopg2-binary
