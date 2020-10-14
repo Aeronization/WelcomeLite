@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 
+# (R. Friel - October 14, 2020) - Ensure a .env file is created in the same directory as settings.py
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -97,16 +102,22 @@ WSGI_APPLICATION = 'welcome_lite.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ["ENGINE"],
+#         "NAME": os.environ["NAME"],
+#         "USER": os.environ["USER"],
+#         "PASSWORD": os.environ["PASSWORD"],
+#         "HOST": os.environ["HOST"],
+#         "PORT": os.environ["PORT"],
+#     }
+# }
+
+# (R. Friel - October 14, 2020) - Use default value supplied by Heroku.
 DATABASES = {
-    "default": {
-        "ENGINE": 'django.db.backends.postgresql_psycopg2',
-        "NAME": 'd5ci41lrpk0o4',
-        "USER": 'dqssyvbiwrllbo',
-        "PASSWORD": '52cf9340f2bb7dbad6bac6cbae4cc7b3014a32c89f4ab00c447b1d49a117f673',
-        "HOST": 'ec2-18-210-90-1.compute-1.amazonaws.com',
-        "PORT": '5432',
-    }
+    'default': env.db('DATABASE_URL')
 }
+
 
 
 # Password validation
