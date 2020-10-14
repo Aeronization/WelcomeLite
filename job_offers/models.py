@@ -11,7 +11,7 @@ class JobOffer(models.Model):
     salary_offer = models.IntegerField(null=True, blank=True, default=0)
     offer_accepted = models.BooleanField(default=False, null=True, blank=True)
 
-    job_poster = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    job_poster = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
 
     @classmethod
     def get_all_job_offers(cls, job_poster_id) -> list:
